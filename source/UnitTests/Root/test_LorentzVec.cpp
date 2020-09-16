@@ -26,12 +26,32 @@ TEST(TestLorentzVec, zBoost) {
   auto pz_res = boosted_vec.Pz();
   auto E_res = boosted_vec.E();
   auto M_res = boosted_vec.M();
-  
+
   ASSERT_EQ(px_res, px_pred);
   ASSERT_EQ(py_res, py_pred);
   ASSERT_EQ(pz_res, pz_pred);
   ASSERT_EQ(E_res, E_pred);
   ASSERT_EQ(M_res, M_pred);
+}
+
+//------------------------------------------------------------------------------
+
+TEST(TestLorentzVec, TestRotation) {
+  // Test if rotation works (small test, larger in rotation fct test)
+  TLorentzVector tlv(1, -1, 1, 20); // Object to rotate
+
+  // Rotation directions
+  TLorentzVector new_z_direction(1, 0, 0, 10);
+  TLorentzVector other_plane_direction(0, 0, 1, 5);
+
+  // Rotate
+  auto res_tlv =
+      LorentzVec::rotate_into(tlv, new_z_direction, other_plane_direction);
+
+  // Expected result
+  TLorentzVector pred_tlv(1, 1, 1, 20);
+
+  ASSERT_EQ(res_tlv, pred_tlv);
 }
 
 //------------------------------------------------------------------------------
