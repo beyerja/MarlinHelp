@@ -1,12 +1,12 @@
-#ifndef LIB_MARLINHELP_PARTICLE_MC
-#define LIB_MARLINHELP_PARTICLE_MC 1
+#ifndef LIB_MARLINHELP_ROOT_LORENTZVEC
+#define LIB_MARLINHELP_ROOT_LORENTZVEC 1
 
 #include "TLorentzVector.h"
 
 namespace MarlinHelp {
 namespace Root {
 namespace LorentzVec {
-/** Namespace for helper functions that concern MCParticles.
+/** Namespace for helper functions that concern TLorentzVector.
  **/
   
 TLorentzVector boost_tlv(const TLorentzVector &vec, const TLorentzVector &boost_system );
