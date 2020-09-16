@@ -8,8 +8,6 @@
 file(GLOB_RECURSE SOURCES LIST_DIRECTORIES true src/MarlinHelp/*/*.cpp)
 set(SOURCES ${SOURCES})
 
-file(GLOB HEADERS include/MarlinHelp/*/*.h)
-
 ###############################################################################
 ## target definitions #########################################################
 ###############################################################################
@@ -45,4 +43,4 @@ target_link_libraries(
 install(TARGETS ${CMAKE_PROJECT_NAME} DESTINATION lib/${CMAKE_PROJECT_NAME})
 
 # Install library headers
-install(FILES ${HEADERS} DESTINATION include/${CMAKE_PROJECT_NAME})
+install(DIRECTORY include/MarlinHelp DESTINATION include)
