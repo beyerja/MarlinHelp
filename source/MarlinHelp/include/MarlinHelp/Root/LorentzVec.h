@@ -8,11 +8,16 @@ namespace Root {
 namespace LorentzVec {
 /** Namespace for helper functions that concern TLorentzVector.
  **/
-  
-TLorentzVector boost_tlv(const TLorentzVector &vec, const TLorentzVector &boost_system );
 
-} // namespace MCHelp
-} // namespace Particle
+TLorentzVector boost_tlv(const TLorentzVector &vec,
+                         const TLorentzVector &boost_system);
+
+TLorentzVector rotate_into(const TLorentzVector &vec,
+                           const TLorentzVector &new_z,
+                           const TLorentzVector &other_plane_axis);
+
+} // namespace LorentzVec
+} // namespace Root
 } // namespace MarlinHelp
 
 #endif
