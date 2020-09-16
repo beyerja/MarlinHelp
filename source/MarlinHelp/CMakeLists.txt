@@ -1,5 +1,3 @@
-set(BINARY ${CMAKE_PROJECT_NAME})
-
 ###############################################################################
 ## file globbing ##############################################################
 ###############################################################################
@@ -7,22 +5,20 @@ set(BINARY ${CMAKE_PROJECT_NAME})
 # these instructions search the directory tree when cmake is
 # invoked and put all files that match the pattern in the variables 
 # `sources`
-file(
-  GLOB_RECURSE SOURCES LIST_DIRECTORIES true 
-  include/MarlinHelp/*/*.h 
-  src/MarlinHelp/*/*.cpp
-)
+file(GLOB_RECURSE SOURCES LIST_DIRECTORIES true src/MarlinHelp/*/*.cpp)
 set(SOURCES ${SOURCES})
+
+file(GLOB HEADERS include/MarlinHelp/*/*.h)
 
 ###############################################################################
 ## target definitions #########################################################
 ###############################################################################
 
-add_library(${BINARY} ${SOURCES})
+add_library(${CMAKE_PROJECT_NAME} SHARED ${SOURCES})
 
 # just for example add some compiler flags
 target_compile_options(
-  ${BINARY} PUBLIC -std=c++1y 
+  ${CMAKE_PROJECT_NAME} PUBLIC -std=c++1y 
   # Compiler warning/error flags
   -Wall -Wfloat-conversion -Wextra -Wunreachable-code -Wuninitialized 
   -pedantic-errors -Wold-style-cast -Wno-error=unused-variable
@@ -37,7 +33,7 @@ target_compile_options(
 
 # Link the needed libraries so that its compiled code can be used
 target_link_libraries(
-  ${BINARY} PUBLIC 
+  ${CMAKE_PROJECT_NAME} PUBLIC 
   ${SPDLOG_LIB} # Logging
 )
 
@@ -45,9 +41,8 @@ target_link_libraries(
 ## packaging ##################################################################
 ###############################################################################
 
-# install binary in bin folder
-install(
-  TARGETS ${BINARY} 
-  ARCHIVE DESTINATION lib
-  COMPONENT library
-)
+# Install library
+install(TARGETS ${CMAKE_PROJECT_NAME} DESTINATION lib/${CMAKE_PROJECT_NAME})
+
+# Install library headers
+install(FILES ${HEADERS} DESTINATION include/${CMAKE_PROJECT_NAME})

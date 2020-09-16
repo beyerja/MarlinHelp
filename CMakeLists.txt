@@ -24,13 +24,17 @@ include_directories(
   external/spdlog/include
 )
 
+# Install in local folder instead of system
+set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR})
+
+# Make sure the shared library of MarlinHelp is found
+set(CMAKE_INSTALL_RPATH ${CMAKE_SOURCE_DIR}/lib/${CMAKE_PROJECT_NAME})
+set(CMAKE_INSTALL_RPATH_USE_LINK_PATH TRUE)
+
 # Code subdirectories with own CMakelists
 add_subdirectory(source/MarlinHelp)
 add_subdirectory(source/UnitTests)
 add_subdirectory(external/googletest)
-
-# Install in local folder instead of system
-set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR})
 
 # Package name and version
 set(CPACK_PACKAGE_NAME "Helpers")
