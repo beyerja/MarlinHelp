@@ -9,6 +9,8 @@ namespace LorentzVec {
 /** Namespace for helper functions that concern TLorentzVector.
  **/
 
+std::string print(const TLorentzVector &vec);
+
 TLorentzVector boost_tlv(const TLorentzVector &vec,
                          const TLorentzVector &boost_system);
 

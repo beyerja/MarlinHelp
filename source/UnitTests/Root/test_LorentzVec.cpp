@@ -6,6 +6,16 @@ using namespace MarlinHelp::Root;
 
 //------------------------------------------------------------------------------
 
+TEST(TestLorentzVec, TestPrint) {
+  // Test if TLorentzVector printing works correctly
+  TLorentzVector v(-2, 1.5, 0.01, 20);
+
+  ASSERT_STREQ(LorentzVec::print(v).c_str(),
+               "E: 20.000000 P: -2.000000 1.500000 0.010000");
+}
+
+//------------------------------------------------------------------------------
+
 TEST(TestLorentzVec, zBoost) {
   TLorentzVector vec(1.1, 2.2, 3.5, 25); // Particle moving in positive z
   TLorentzVector boost_vec(0, 0, 3, 5);  // pZ = 3, E = 5, m = 4 (GeV)

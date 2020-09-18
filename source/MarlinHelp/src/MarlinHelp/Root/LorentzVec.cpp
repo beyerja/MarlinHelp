@@ -6,6 +6,15 @@ namespace Root {
 
 //------------------------------------------------------------------------------
 
+std::string LorentzVec::print(const TLorentzVector &vec) {
+  /** Print the x-y-z content of the vector.
+   **/
+  return "E: " + std::to_string(vec.E()) + " P: " + std::to_string(vec.Px()) +
+         " " + std::to_string(vec.Py()) + " " + std::to_string(vec.Pz());
+}
+
+//------------------------------------------------------------------------------
+
 TLorentzVector LorentzVec::boost_tlv(const TLorentzVector &vec,
                                      const TLorentzVector &boost_system) {
   /** Return how the vector (vec) looks in the rest frame of the boost system.
