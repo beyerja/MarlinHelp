@@ -23,8 +23,18 @@ TVector3 Vec3::rotate_into(const TVector3 &vec, const TVector3 &new_z,
    *new_z is the z axis, the new x axis lies in the plane of the new_z and the
    *other given axis, and the sign of the y axis wrt. to the plane is positive.
    **/
+  // First make sure new z and x are perpendicular unit vectors
+  auto z_unit = new_z.Unit();
+  auto other_unit = other_plane_axis.Unit();
+  
+  // Find only part of unit that is perpendicular to other plane axis
+  auto new_y = z_unit.Cross(other_unit);
+  auto new_x = new_y.Cross(new_z);
+  auto x_unit = new_x.Unit();
+   
+  // Use new x and z axis directions and rotate vec into that system
   TRotation rotation;
-  rotation.SetZAxis(new_z, other_plane_axis);
+  rotation.SetZAxis(z_unit, x_unit);
   rotation.Invert();
   
   return rotation * vec;
