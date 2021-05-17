@@ -1,7 +1,12 @@
 #include <gtest/gtest.h>
 
+#include <MarlinHelp/Cpp/Num.h>
 #include <MarlinHelp/Root/LorentzVec.h>
 
+// Standard library
+#include <vector>
+
+using namespace MarlinHelp::Cpp;
 using namespace MarlinHelp::Root;
 
 //------------------------------------------------------------------------------
@@ -62,6 +67,26 @@ TEST(TestLorentzVec, TestRotation) {
   TLorentzVector pred_tlv(1, 1, 1, 20);
 
   ASSERT_EQ(res_tlv, pred_tlv);
+}
+
+//------------------------------------------------------------------------------
+
+TEST(TestLorentzVec, TestCosTheta) {
+  using TestPair = std::pair<std::pair<TLorentzVector,TLorentzVector>,double>;
+  
+  std::vector<TestPair> tests {
+    {{{2,0,0,0},{4,0,0,0}},1},
+    {{{0.5,0,0,0},{-5,0,0,0}},-1},
+    {{{1,0,0,0},{0,6,0,0}},0}
+  };
+  
+  for (const auto & test: tests) {
+    const auto & v1 = test.first.first;
+    const auto & v2 = test.first.second;
+    ASSERT_EQ(LorentzVec::cos_theta(v1,v1),1);
+    ASSERT_EQ(LorentzVec::cos_theta(v2,v2),1);
+    ASSERT_TRUE(Num::equal_eps(LorentzVec::cos_theta(v1,v2),test.second));
+  }
 }
 
 //------------------------------------------------------------------------------
