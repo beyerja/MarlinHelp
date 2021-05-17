@@ -18,6 +18,8 @@ TLorentzVector rotate_into(const TLorentzVector &vec,
                            const TLorentzVector &new_z,
                            const TLorentzVector &other_plane_axis);
 
+double cos_theta(const TLorentzVector &vec1, const TLorentzVector &vec2);
+
 } // namespace LorentzVec
 } // namespace Root
 } // namespace MarlinHelp

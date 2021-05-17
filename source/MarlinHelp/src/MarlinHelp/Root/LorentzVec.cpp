@@ -1,6 +1,9 @@
 #include <MarlinHelp/Root/LorentzVec.h>
 #include <MarlinHelp/Root/Vec3.h>
 
+// Standard library
+#include <cmath>
+
 namespace MarlinHelp {
 namespace Root {
 
@@ -36,6 +39,14 @@ TLorentzVector LorentzVec::rotate_into(const TLorentzVector &vec,
   auto rotated_mom =
       Vec3::rotate_into(vec.Vect(), new_z.Vect(), other_plane_axis.Vect());
   return TLorentzVector(rotated_mom, vec.E());
+}
+
+//------------------------------------------------------------------------------
+
+double LorentzVec::cos_theta(const TLorentzVector &vec1, const TLorentzVector &vec2) {
+  /** Calculate the cosine of the angle between the vectors of the two tlvs. 
+   **/
+  return std::cos(vec1.Angle(vec2.Vect()));
 }
 
 //------------------------------------------------------------------------------
