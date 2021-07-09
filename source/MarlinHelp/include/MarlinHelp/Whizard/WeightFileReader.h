@@ -9,7 +9,8 @@ namespace MarlinHelp {
 namespace Whizard {
 
 class WeightFileReader {
-
+  /** Reader for Whizard rescan weight files.
+   **/
   std::vector<std::vector<double>> m_weights{};
 
 public:
