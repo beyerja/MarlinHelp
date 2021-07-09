@@ -14,6 +14,7 @@ class WeightFileReader {
   std::vector<std::vector<double>> m_weights{};
 
 public:
+  WeightFileReader() = default;
   WeightFileReader(const std::string &wf_path);
 
   int n_events() const { return m_weights.size(); };

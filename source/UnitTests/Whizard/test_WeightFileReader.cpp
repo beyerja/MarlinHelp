@@ -12,6 +12,11 @@ using namespace MarlinHelp::Whizard;
 const std::string test_path{
     "../source/UnitTests/Whizard/TestWeightFile.weights.dat"};
 
+TEST(TestWeightFileReader, DefaultConstructor) {
+  WeightFileReader wfr{};
+  ASSERT_EQ(wfr.n_events(), 0) << "Found " << wfr.n_events();
+}
+  
 TEST(TestWeightFileReader, TestFileReading) {
   WeightFileReader wfr(test_path);
 
